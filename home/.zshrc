@@ -61,6 +61,13 @@ hidedotfiles() {
   killall Finder
 }
 
+copyssh() {
+  local public_key="$HOME/.ssh/id_ed25519.pub"
+  [[ -f "$public_key" ]] || { print -u2 "Public key not found: $public_key"; return 1; }
+  pbcopy < "$public_key"
+  print 'Copied the SSH public key to the clipboard.'
+}
+
 # Remove Finder metadata from a project directory, never from $HOME or /.
 cleanup() {
   local target="${1:-.}" resolved

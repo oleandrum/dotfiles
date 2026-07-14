@@ -1,0 +1,58 @@
+#!/bin/zsh
+
+# Apply the explicitly selected, user-level macOS preferences.
+emulate -L zsh
+setopt err_exit no_unset pipe_fail
+
+script_name="${0:t}"
+apply=false
+
+usage() {
+  print "Usage: $script_name --dry-run | --apply"
+}
+
+[[ $# -eq 1 ]] || { usage; exit 2; }
+case "$1" in
+  --dry-run) ;;
+  --apply) apply=true ;;
+  --help|-h) usage; exit 0 ;;
+  *) usage; exit 2 ;;
+esac
+
+[[ "$(uname)" == Darwin ]] || { print -u2 'This script targets macOS.'; exit 1; }
+
+write_default() {
+  if $apply; then
+    defaults write "$@"
+  else
+    print -r -- "defaults write ${(j: :)@}"
+  fi
+}
+
+# Finder
+write_default NSGlobalDomain AppleShowAllExtensions -bool true
+write_default com.apple.finder ShowStatusBar -bool true
+write_default com.apple.finder ShowPathbar -bool true
+write_default com.apple.finder _FXShowPosixPathInTitle -bool true
+write_default com.apple.finder _FXSortFoldersFirst -bool true
+write_default com.apple.desktopservices DSDontWriteNetworkStores -bool true
+write_default com.apple.desktopservices DSDontWriteUSBStores -bool true
+write_default com.apple.finder FXPreferredViewStyle -string Nlsv
+
+# Dock
+write_default com.apple.dock show-recents -bool false
+
+# Terminal
+write_default com.apple.terminal StringEncodings -array 4
+
+if $apply; then
+  chflags nohidden "$HOME/Library"
+  xattr -d com.apple.FinderInfo "$HOME/Library" 2>/dev/null || true
+  killall Finder 2>/dev/null || true
+  killall Dock 2>/dev/null || true
+  print 'Done. Quit and reopen Terminal to load its new setting.'
+else
+  print 'chflags nohidden ~/Library'
+  print 'xattr -d com.apple.FinderInfo ~/Library (ignored when absent)'
+  print 'Finder and Dock would restart; Terminal is not closed automatically.'
+fi

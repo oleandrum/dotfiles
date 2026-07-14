@@ -28,6 +28,10 @@ separate command.
 - `./scripts/sync` creates missing symbolic links. It stops on collisions.
 - `./scripts/sync --force` preserves colliding files in
   `~/.dotfiles-backups/<timestamp>/` before linking.
+- `./scripts/macos --dry-run` shows the selected macOS preference changes;
+  `./scripts/macos --apply` applies them. It is deliberately separate from
+  `install`. Safari and Mail settings are left to their own Settings interfaces,
+  because modern macOS protects their preference containers.
 
 ## Shell commands
 

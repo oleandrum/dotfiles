@@ -28,6 +28,8 @@ entries=(
   '.gitattributes::home/.gitattributes'
   '.gitconfig::home/.gitconfig'
   '.gitignore::home/.gitignore'
+  '.latexmkrc::home/.latexmkrc'
+  '.markdownlint::home/.markdownlint'
   '.zprofile::home/.zprofile'
   '.zshrc::home/.zshrc'
   '.gnupg/common.conf::config/gnupg/common.conf'
