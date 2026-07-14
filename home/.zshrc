@@ -32,3 +32,76 @@ if [[ -s "$NVM_DIR/nvm.sh" ]]; then
   source "$NVM_DIR/nvm.sh"
   [[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
 fi
+
+# Minimal Flexoki prompt: user at host in directory, with optional Git state.
+dotfiles_git_prompt() {
+  local branch state
+  branch="$(command git symbolic-ref --quiet --short HEAD 2>/dev/null || command git describe --tags --always 2>/dev/null)" || return
+
+  if [[ -n "$(command git status --porcelain=v1 2>/dev/null)" ]]; then
+    state='%F{#AF3029}*%f'
+  else
+    state='%F{#66800B}✓%f'
+  fi
+
+  print -Pn " %F{#205EA6}git:%f%F{#4385BE}${branch}%f ${state}"
+}
+
+setopt prompt_subst
+PROMPT='%F{#24837B}%n%f %F{#6F6E69}at%f %F{#24837B}%m%f %F{#6F6E69}in%f %F{#5E409D}%1~%f$(dotfiles_git_prompt) %# '
+
+# Finder visibility helpers. They affect only Finder's hidden-file preference.
+showdotfiles() {
+  defaults write com.apple.finder AppleShowAllFiles -bool true
+  killall Finder
+}
+
+hidedotfiles() {
+  defaults write com.apple.finder AppleShowAllFiles -bool false
+  killall Finder
+}
+
+# Remove Finder metadata from a project directory, never from $HOME or /.
+cleanup() {
+  local target="${1:-.}" resolved
+  [[ -d "$target" ]] || { print -u2 "Not a directory: $target"; return 2; }
+  resolved="${target:A}"
+  if [[ "$resolved" == / || "$resolved" == "$HOME" ]]; then
+    print -u2 "Refusing to clean $resolved; choose a project directory instead."
+    return 2
+  fi
+
+  find "$resolved" -type f \( -name '.DS_Store' -o -name '._*' \) -print -delete
+  find "$resolved" -depth -type d -name '.AppleDouble' -print -exec rm -rf {} +
+}
+
+# Update user-managed tools. System Ruby and Python are intentionally untouched.
+update() {
+  local current_node
+
+  if (( $+commands[brew] )); then
+    brew update && brew upgrade && brew cleanup
+  else
+    print -u2 'Homebrew is not installed; skipping it.'
+  fi
+
+  if (( $+functions[nvm] )); then
+    current_node="$(nvm current 2>/dev/null)"
+    if [[ "$current_node" == v* ]]; then
+      nvm install --lts --reinstall-packages-from="$current_node" --latest-npm
+      nvm alias default 'lts/*'
+    else
+      print -u2 'NVM has no active Node version; skipping Node update.'
+    fi
+  else
+    print -u2 'NVM is not installed; skipping Node update.'
+  fi
+
+  if (( $+commands[deno] )); then
+    deno upgrade
+  else
+    print -u2 'Deno is not installed; skipping it.'
+  fi
+
+  print 'System Ruby and Python are managed by macOS and were not changed.'
+}

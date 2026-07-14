@@ -46,6 +46,15 @@ fi
 if ! $dry_run; then
   print "Import the Terminal profile from: $repo_root/config/terminal/Flexoki Light.terminal"
 
+  fonts_dir="$repo_root/fonts"
+  if [[ -d "$fonts_dir" ]]; then
+    while IFS= read -r -d '' font; do
+      mkdir -p "$HOME/Library/Fonts"
+      cp -f "$font" "$HOME/Library/Fonts/"
+      print "installed font: ${font:t}"
+    done < <(find "$fonts_dir" -type f \( -iname '*.otf' -o -iname '*.ttf' -o -iname '*.ttc' \) -print0)
+  fi
+
   extensions_file="$repo_root/config/vscode/extensions.txt"
   if (( $+commands[code] )) && [[ -f "$extensions_file" ]]; then
     while IFS= read -r extension; do

@@ -18,7 +18,6 @@ These applications are intentionally not installed by Homebrew. Download them
 from their official sites after the base setup is complete:
 
 - AppCleaner
-- ChatGPT
 - Firefox
 - Little Snitch
 - MacTeX
@@ -35,6 +34,11 @@ from their official sites after the base setup is complete:
 `config/terminal/Flexoki Light.terminal` is the exported Terminal profile.
 Double-click it in Finder (or use Terminal's Settings import flow), then choose
 **Flexoki Light** as the default profile.
+
+## Fonts
+
+Add redistributable font files to `fonts/`. The setup script installs them into
+`~/Library/Fonts`; it does not use administrator privileges.
 
 ## Visual Studio Code
 

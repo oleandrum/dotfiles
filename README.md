@@ -29,6 +29,17 @@ separate command.
 - `./scripts/sync --force` preserves colliding files in
   `~/.dotfiles-backups/<timestamp>/` before linking.
 
+## Shell commands
+
+After `sync`, zsh provides a compact Flexoki-coloured prompt and these commands:
+
+- `showdotfiles` and `hidedotfiles` change Finder's hidden-file visibility.
+- `cleanup [directory]` deletes only Finder metadata (`.DS_Store`, `._*` and
+  `.AppleDouble`) below a project directory. It refuses `$HOME` and `/`.
+- `update` updates Homebrew, moves Node to the current LTS through NVM while
+  carrying over global packages, and updates Deno. It deliberately leaves the
+  system Ruby and Python installations to macOS.
+
 All scripts accept `--dry-run`. Run `git diff` and `git status` after a backup,
 then commit the changes you want to keep.
 
