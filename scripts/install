@@ -1,0 +1,58 @@
+#!/bin/zsh
+
+emulate -L zsh
+setopt err_exit no_unset pipe_fail
+
+script_dir="${0:A:h}"
+repo_root="${script_dir:h}"
+script_name="${0:t}"
+dry_run=false
+sync_args=()
+
+usage() {
+  print "Usage: $script_name [--dry-run] [--force]"
+  print "Creates local directories and a Git identity template, then runs sync."
+}
+
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) dry_run=true; sync_args+=(--dry-run) ;;
+    --force) sync_args+=(--force) ;;
+    --help|-h) usage; exit 0 ;;
+    *) print -u2 "Unknown option: $arg"; usage; exit 2 ;;
+  esac
+done
+
+if [[ "$(uname)" != Darwin ]]; then
+  print -u2 "This setup targets macOS. No changes were made."
+  exit 1
+fi
+
+if $dry_run; then
+  print "create: ~/.ssh and ~/.gnupg"
+  [[ -e "$HOME/.gitconfig.local" ]] || print "create: ~/.gitconfig.local from template"
+else
+  mkdir -p "$HOME/.ssh" "$HOME/.gnupg"
+  chmod 700 "$HOME/.ssh" "$HOME/.gnupg"
+  if [[ ! -e "$HOME/.gitconfig.local" ]]; then
+    cp "$repo_root/templates/.gitconfig.local.example" "$HOME/.gitconfig.local"
+    chmod 600 "$HOME/.gitconfig.local"
+    print "created: ~/.gitconfig.local (fill in your identity before signing commits)"
+  fi
+fi
+
+"$script_dir/sync" "${sync_args[@]}"
+
+if ! $dry_run; then
+  print "Import the Terminal profile from: $repo_root/config/terminal/Flexoki Light.terminal"
+
+  extensions_file="$repo_root/config/vscode/extensions.txt"
+  if (( $+commands[code] )) && [[ -f "$extensions_file" ]]; then
+    while IFS= read -r extension; do
+      [[ -z "$extension" || "$extension" == \#* ]] && continue
+      code --install-extension "$extension"
+    done < "$extensions_file"
+  elif [[ -f "$extensions_file" ]]; then
+    print "VS Code extensions: install Visual Studio Code, enable its 'code' command, then rerun install."
+  fi
+fi

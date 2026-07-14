@@ -1,0 +1,30 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 80
+trim_trailing_whitespace = true
+quote_type = double
+
+[*.{json,yaml,yml}]
+indent_style = space
+indent_size = 2
+
+[*.{md,markdown}]
+max_line_length = off
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+indent_size = 4
+
+[*.{py,go}]
+indent_style = tab
+indent_size = 4
+
+[*.txt]
+indent_size = false

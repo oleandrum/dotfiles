@@ -1,0 +1,100 @@
+#!/bin/zsh
+
+emulate -L zsh
+setopt err_exit no_unset pipe_fail
+
+script_dir="${0:A:h}"
+repo_root="${script_dir:h}"
+script_name="${0:t}"
+dry_run=false
+force=false
+
+usage() {
+  print "Usage: $script_name [--dry-run] [--force]"
+}
+
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) dry_run=true ;;
+    --force) force=true ;;
+    --help|-h) usage; exit 0 ;;
+    *) print -u2 "Unknown option: $arg"; usage; exit 2 ;;
+  esac
+done
+
+entries=(
+  '.curlrc::home/.curlrc'
+  '.editorconfig::home/.editorconfig'
+  '.gitattributes::home/.gitattributes'
+  '.gitconfig::home/.gitconfig'
+  '.gitignore::home/.gitignore'
+  '.zprofile::home/.zprofile'
+  '.zshrc::home/.zshrc'
+  '.gnupg/common.conf::config/gnupg/common.conf'
+  '.gnupg/gpg-agent.conf::config/gnupg/gpg-agent.conf'
+  '.ssh/config::config/ssh/config'
+  'Library/Application Support/Code/User/settings.json::config/vscode/User/settings.json'
+  'Library/Application Support/Code/User/keybindings.json::config/vscode/User/keybindings.json'
+  'Library/Application Support/Code/User/snippets/markdown.json::config/vscode/User/snippets/markdown.json'
+)
+
+collisions=0
+for entry in "${entries[@]}"; do
+  target_path="$HOME/${entry%%::*}"
+  source_path="$repo_root/${entry##*::}"
+
+  if [[ ! -e "$source_path" ]]; then
+    print -u2 "Missing repository file: $source_path"
+    exit 1
+  fi
+
+  if [[ -e "$target_path" || -L "$target_path" ]]; then
+    if [[ -L "$target_path" && "${target_path:A}" == "${source_path:A}" ]]; then
+      continue
+    fi
+    if ! $force; then
+      print -u2 "collision: $target_path"
+      (( collisions++ ))
+    fi
+  fi
+done
+
+if (( collisions > 0 )); then
+  print -u2 "Nothing was changed. Run $script_name --force to preserve these files in ~/.dotfiles-backups and replace them with links."
+  exit 1
+fi
+
+backup_root="$HOME/.dotfiles-backups/$(date +%Y%m%d-%H%M%S)"
+for entry in "${entries[@]}"; do
+  relative_path="${entry%%::*}"
+  target_path="$HOME/$relative_path"
+  source_path="$repo_root/${entry##*::}"
+
+  if [[ -L "$target_path" && "${target_path:A}" == "${source_path:A}" ]]; then
+    print "linked: $target_path"
+    continue
+  fi
+
+  if [[ -e "$target_path" || -L "$target_path" ]]; then
+    archived_path="$backup_root/$relative_path"
+    if $dry_run; then
+      print "archive: $target_path -> $archived_path"
+    else
+      mkdir -p "${archived_path:h}"
+      mv "$target_path" "$archived_path"
+    fi
+  fi
+
+  if $dry_run; then
+    print "link: $target_path -> $source_path"
+  else
+    mkdir -p "${target_path:h}"
+    ln -s "$source_path" "$target_path"
+    print "linked: $target_path"
+  fi
+done
+
+if ! $dry_run; then
+  chmod 700 "$HOME/.ssh" "$HOME/.gnupg"
+  chmod 600 "$repo_root/config/ssh/config" "$repo_root/config/gnupg/gpg-agent.conf"
+fi

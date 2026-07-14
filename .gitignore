@@ -1,0 +1,26 @@
+# Local identity, credentials, history and generated files
+.DS_Store
+.zsh_history
+.zcompdump*
+.gitconfig.local
+*.local
+*.secret
+.env
+.env.*
+
+# SSH and GnuPG material
+config/ssh/id_*
+config/ssh/known_hosts
+config/ssh/cm-*
+config/gnupg/private-keys-v1.d/
+config/gnupg/pubring.kbx
+config/gnupg/trustdb.gpg
+config/gnupg/openpgp-revocs.d/
+
+# GitHub CLI authentication must never be committed.
+config/gh/hosts.yml
+config/gh/hosts.yaml
+
+# Keep the safe local-identity template even if a global ignore matches it.
+!templates/
+!templates/.gitconfig.local.example

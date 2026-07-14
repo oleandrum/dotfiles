@@ -1,0 +1,16 @@
+anthropic.claude-code
+bierner.github-markdown-preview
+bierner.markdown-checkbox
+bierner.markdown-emoji
+bierner.markdown-footnotes
+bierner.markdown-preview-github-styles
+davidanson.vscode-markdownlint
+davidbwaters.macos-modern-theme
+editorconfig.editorconfig
+github.vscode-github-actions
+openai.chatgpt
+pishu.epub-editor
+raillyhugo.one-hunter
+redhat.vscode-yaml
+tamasfe.even-better-toml
+tomoki1207.pdf

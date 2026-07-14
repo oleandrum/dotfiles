@@ -1,0 +1,170 @@
+{
+  "breadcrumbs.enabled": false,
+  "chat.agent.enabled": false,
+  "chat.disableAIFeatures": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.fontFamily": "'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 16,
+  "editor.fontVariations": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.edits.renderSideBySide": "never",
+  "editor.minimap.enabled": false,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on",
+    "other": "on"
+  },
+  "editor.rulers": [
+    80
+  ],
+  "editor.stickyScroll.enabled": false,
+  "editor.tabSize": 2,
+  "editor.unicodeHighlight.allowedLocales": {
+    "bg": true
+  },
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "editor.wordSeparators": "`~!@#%^&*()=+[{]}\\|;:'\",.<>/?",
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 80,
+  "emmet.includeLanguages": {
+    "njk": "html"
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.excludeGitIgnore": true,
+  "files.associations": {
+    ".env.*": "env",
+    "*.geojson": "json",
+    "*.latex": "latex",
+    "*.njk": "html",
+    "*.webc": "html",
+    "*.opf": "xml",
+    "*.js": "javascript",
+    "*.html": "html"
+  },
+  "files.autoGuessEncoding": false,
+  "files.autoSave": "onFocusChange",
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.history": true,
+    "**/node_modules": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableCommitSigning": true,
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "never",
+  "git.requireGitUserConfig": true,
+  "html.format.indentHandlebars": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.wrapLineLength": 0,
+  "markdown.preview.typographer": true,
+  "markdown.updateLinksOnFileMove.enabled": "prompt",
+  "markdown.validate.enabled": true,
+  "search.exclude": {
+    "**/*.svg": true,
+    "**/.git": true,
+    "**/.github": false,
+    "**/.output": true,
+    "**/.pnpm": true,
+    "**/.vscode": true,
+    "**/.yarn": true,
+    "**/assets": true,
+    "**/dist/**": true,
+    "**/logs": true,
+    "**/node_modules": true,
+    "**/out/**": true,
+    "**/package-lock.json": true,
+    "**/pnpm-lock.yaml": true,
+    "**/public": true,
+    "**/temp": true,
+    "**/yarn.lock": true,
+    "**/CHANGELOG*": true,
+    "**/LICENSE*": true
+  },
+  "search.useGlobalIgnoreFiles": true,
+  "search.useParentIgnoreFiles": true,
+  "security.workspace.trust.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "telemetry.feedback.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.fontLigatures.enabled": true,
+  "terminal.integrated.initialHint": false,
+  "window.nativeTabs": true,
+  "window.newWindowProfile": "Default",
+  "workbench.colorTheme": "Flexoki Light",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.enableExperiments": false,
+  "workbench.iconTheme": "macos-modern-big-sur-icon-theme",
+  "workbench.preferredDarkColorTheme": "Flexoki Dark",
+  "workbench.preferredLightColorTheme": "Flexoki Light",
+  "workbench.productIconTheme": "macos-modern",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.tips.enabled": false,
+  "window.zoomLevel": -0.5,
+  "[github-actions-workflow]": {
+    "editor.autoIndent": "advanced",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[latex]": {
+    "editor.autoIndent": "full",
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.useTabStops": true,
+    "editor.wordWrap": "bounded"
+  },
+  "[markdown]": {
+    "editor.detectIndentation": false,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "files.trimTrailingWhitespace": false
+  },
+  "[restructuredtext]": {
+    "editor.insertSpaces": true,
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 4,
+    "editor.wordWrap": "on"
+  },
+  "epub.ai.defaultLanguage": "en",
+  "workbench.editorAssociations": {
+    "*.epub": "default"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "workbench.browser.searchEngine": "duckduckgo",
+  "workbench.browser.openLocalhostLinks": true,
+  "claudeCode.preferredLocation": "panel",
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml"
+  ]
+}

@@ -1,0 +1,65 @@
+[alias]
+    trim = !git remote prune origin && git gc
+    cleanup-preview = clean -ndf
+    cleanup = clean -df
+    adda = !git add -A && git status
+    recommit = commit --amend --no-edit
+
+[apply]
+    whitespace = fix
+
+[color]
+    ui = auto
+    interactive = auto
+
+[core]
+    attributesFile = ~/.gitattributes
+    autocrlf = input
+    excludesfile = ~/.gitignore
+    precomposeunicode = true
+    trustctime = false
+    untrackedCache = true
+    whitespace = space-before-tab,indent-with-non-tab,trailing-space
+
+[credential]
+    helper = osxkeychain
+
+[fetch]
+    prune = true
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[gpg]
+    program = /opt/homebrew/bin/gpg
+
+[help]
+    autocorrect = prompt
+
+[init]
+    defaultBranch = main
+
+[merge]
+    log = true
+
+[mergetool]
+    keepBackup = false
+
+[pull]
+    rebase = true
+
+[push]
+    default = simple
+    followTags = true
+
+[rebase]
+    autoStash = true
+
+[user]
+    useConfigOnly = true
+
+[include]
+    path = ~/.gitconfig.local

@@ -1,0 +1,57 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+*.icloud
+
+# Git merge and patch files
+*.orig
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*.patch
+
+# LaTeX build products
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.fmt
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex*
+*.toc
+*.xdv
+_minted*/
+latex.out/
+svg-inkscape/
+pythontex-files-*/
+
+# Node and environment files
+node_modules/
+.npm/
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+.env
+.env.*.local
+_site/
+.cache/

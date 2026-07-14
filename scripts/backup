@@ -1,0 +1,81 @@
+#!/bin/zsh
+
+emulate -L zsh
+setopt err_exit no_unset pipe_fail
+
+script_dir="${0:A:h}"
+repo_root="${script_dir:h}"
+script_name="${0:t}"
+dry_run=false
+
+usage() {
+  print "Usage: $script_name [--dry-run]"
+}
+
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) dry_run=true ;;
+    --help|-h) usage; exit 0 ;;
+    *) print -u2 "Unknown option: $arg"; usage; exit 2 ;;
+  esac
+done
+
+entries=(
+  '.curlrc::home/.curlrc'
+  '.editorconfig::home/.editorconfig'
+  '.gitattributes::home/.gitattributes'
+  '.gitconfig::home/.gitconfig'
+  '.gitignore::home/.gitignore'
+  '.zprofile::home/.zprofile'
+  '.zshrc::home/.zshrc'
+  '.gnupg/common.conf::config/gnupg/common.conf'
+  '.gnupg/gpg-agent.conf::config/gnupg/gpg-agent.conf'
+  '.ssh/config::config/ssh/config'
+  'Library/Application Support/Code/User/settings.json::config/vscode/User/settings.json'
+  'Library/Application Support/Code/User/keybindings.json::config/vscode/User/keybindings.json'
+  'Library/Application Support/Code/User/snippets/markdown.json::config/vscode/User/snippets/markdown.json'
+)
+
+for entry in "${entries[@]}"; do
+  source_path="$HOME/${entry%%::*}"
+  target_path="$repo_root/${entry##*::}"
+
+  if [[ ! -e "$source_path" ]]; then
+    print "skip (missing): $source_path"
+    continue
+  fi
+
+  # A symlink already pointing to this repository has no independent content.
+  if [[ -L "$source_path" && "${source_path:A}" == "${target_path:A}" ]]; then
+    print "skip (managed): $source_path"
+    continue
+  fi
+
+  if $dry_run; then
+    print "copy: $source_path -> $target_path"
+  else
+    mkdir -p "${target_path:h}"
+    cp -p "$source_path" "$target_path"
+    print "saved: ${target_path#$repo_root/}"
+  fi
+done
+
+extensions_file="$repo_root/config/vscode/extensions.txt"
+if (( $+commands[code] )); then
+  if $dry_run; then
+    print "save extensions: code --list-extensions --show-versions"
+  else
+    code --list-extensions --show-versions | sort > "$extensions_file"
+    print "saved: config/vscode/extensions.txt"
+  fi
+elif [[ -d "$HOME/.vscode/extensions" ]]; then
+  if $dry_run; then
+    print "save extensions: $HOME/.vscode/extensions"
+  else
+    find "$HOME/.vscode/extensions" -maxdepth 1 -mindepth 1 -type d -print | \
+      sed 's#.*/##; s/-[0-9][0-9A-Za-z._-]*$//' | sort > "$extensions_file"
+    print "saved: config/vscode/extensions.txt"
+  fi
+fi
+
+print "Review with: git -C $repo_root diff"

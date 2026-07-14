@@ -1,0 +1,386 @@
+[
+  {
+    "key": "alt+a",
+    "command": "type",
+    "args": {
+      "text": "ā"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+a",
+    "command": "type",
+    "args": {
+      "text": "Ā"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+i",
+    "command": "type",
+    "args": {
+      "text": "ī"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+i",
+    "command": "type",
+    "args": {
+      "text": "Ī"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+u",
+    "command": "type",
+    "args": {
+      "text": "ū"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+u",
+    "command": "type",
+    "args": {
+      "text": "Ū"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+r",
+    "command": "type",
+    "args": {
+      "text": "ṛ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+r",
+    "command": "type",
+    "args": {
+      "text": "Ṛ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+f",
+    "command": "type",
+    "args": {
+      "text": "ṝ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+f",
+    "command": "type",
+    "args": {
+      "text": "Ṝ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+l",
+    "command": "type",
+    "args": {
+      "text": "ḷ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+l",
+    "command": "type",
+    "args": {
+      "text": "Ḷ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+k",
+    "command": "type",
+    "args": {
+      "text": "ḹ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+k",
+    "command": "type",
+    "args": {
+      "text": "Ḹ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+e",
+    "command": "type",
+    "args": {
+      "text": "ē"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+e",
+    "command": "type",
+    "args": {
+      "text": "Ē"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+o",
+    "command": "type",
+    "args": {
+      "text": "ō"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+o",
+    "command": "type",
+    "args": {
+      "text": "Ō"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+m",
+    "command": "type",
+    "args": {
+      "text": "ṃ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+m",
+    "command": "type",
+    "args": {
+      "text": "Ṃ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+comma",
+    "command": "type",
+    "args": {
+      "text": "ṁ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+comma",
+    "command": "type",
+    "args": {
+      "text": "Ṁ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+h",
+    "command": "type",
+    "args": {
+      "text": "ḥ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+h",
+    "command": "type",
+    "args": {
+      "text": "Ḥ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+g",
+    "command": "type",
+    "args": {
+      "text": "ṅ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+g",
+    "command": "type",
+    "args": {
+      "text": "Ṅ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+j",
+    "command": "type",
+    "args": {
+      "text": "ñ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+j",
+    "command": "type",
+    "args": {
+      "text": "Ñ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+n",
+    "command": "type",
+    "args": {
+      "text": "ṇ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+n",
+    "command": "type",
+    "args": {
+      "text": "Ṇ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+t",
+    "command": "type",
+    "args": {
+      "text": "ṭ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+t",
+    "command": "type",
+    "args": {
+      "text": "Ṭ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+d",
+    "command": "type",
+    "args": {
+      "text": "ḍ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+d",
+    "command": "type",
+    "args": {
+      "text": "Ḍ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+s",
+    "command": "type",
+    "args": {
+      "text": "ś"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+s",
+    "command": "type",
+    "args": {
+      "text": "Ś"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+x",
+    "command": "type",
+    "args": {
+      "text": "ṣ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+x",
+    "command": "type",
+    "args": {
+      "text": "Ṣ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+v",
+    "command": "type",
+    "args": {
+      "text": "l̤"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+v",
+    "command": "type",
+    "args": {
+      "text": "L̤"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+c",
+    "command": "type",
+    "args": {
+      "text": "̐"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+c",
+    "command": "type",
+    "args": {
+      "text": "̐"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+1",
+    "command": "type",
+    "args": {
+      "text": "ḫ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+2",
+    "command": "type",
+    "args": {
+      "text": "ẖ"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+quote",
+    "command": "type",
+    "args": {
+      "text": "“"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+quote",
+    "command": "type",
+    "args": {
+      "text": "”"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+minus",
+    "command": "type",
+    "args": {
+      "text": "—"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+period",
+    "command": "type",
+    "args": {
+      "text": "…"
+    },
+    "when": "editorTextFocus && !editorReadonly"
+  }
+]
