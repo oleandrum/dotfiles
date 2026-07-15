@@ -11,7 +11,7 @@ sync_args=()
 
 usage() {
   print "Usage: $script_name [--dry-run] [--force]"
-  print "Creates local directories and a Git identity template, then runs sync."
+  print "Creates local directories, installs Deno/NVM/Node LTS, then runs sync."
 }
 
 for arg in "$@"; do
@@ -42,6 +42,25 @@ else
 fi
 
 "$script_dir/sync" "${sync_args[@]}"
+
+if $dry_run; then
+  [[ -x "$HOME/.deno/bin/deno" ]] || print 'install: Deno from https://deno.land/install.sh'
+  [[ -s "$HOME/.nvm/nvm.sh" ]] || print 'install: NVM v0.40.5 from nvm-sh/nvm'
+  print 'install: current Node LTS through NVM'
+else
+  if [[ ! -x "$HOME/.deno/bin/deno" ]]; then
+    curl -fsSL https://deno.land/install.sh | sh
+  fi
+
+  if [[ ! -s "$HOME/.nvm/nvm.sh" ]]; then
+    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash'
+  fi
+
+  export NVM_DIR="$HOME/.nvm"
+  source "$NVM_DIR/nvm.sh"
+  nvm install --lts --latest-npm
+  nvm alias default 'lts/*'
+fi
 
 if ! $dry_run; then
   print "Import the Terminal profile from: $repo_root/config/terminal/Flexoki Light.terminal"
