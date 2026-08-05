@@ -94,8 +94,6 @@
   },
   "search.useGlobalIgnoreFiles": true,
   "search.useParentIgnoreFiles": true,
-  "security.workspace.trust.enabled": false,
-  "security.workspace.trust.untrustedFiles": "open",
   "telemetry.feedback.enabled": false,
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.copyOnSelection": true,

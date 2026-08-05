@@ -49,11 +49,21 @@ if $dry_run; then
   print 'install: current Node LTS through NVM'
 else
   if [[ ! -x "$HOME/.deno/bin/deno" ]]; then
-    curl -fsSL https://deno.land/install.sh | sh
+    installer="$(mktemp "${TMPDIR:-/tmp}/deno-install.XXXXXX.sh")"
+    trap 'rm -f "$installer"' EXIT
+    curl -fsSL https://deno.land/install.sh -o "$installer"
+    sh "$installer"
+    rm -f "$installer"
+    trap - EXIT
   fi
 
   if [[ ! -s "$HOME/.nvm/nvm.sh" ]]; then
-    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash'
+    installer="$(mktemp "${TMPDIR:-/tmp}/nvm-install.XXXXXX.sh")"
+    trap 'rm -f "$installer"' EXIT
+    curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh -o "$installer"
+    PROFILE=/dev/null bash "$installer"
+    rm -f "$installer"
+    trap - EXIT
   fi
 
   export NVM_DIR="$HOME/.nvm"
