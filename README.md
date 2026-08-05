@@ -12,15 +12,18 @@ generated caches are deliberately excluded.
 ## First use on a new Mac
 
 1. Clone the repository to its final location, for example `~/Github/dotfiles`.
-2. Run `./scripts/install` from the repository root.
-3. Fill in `~/.gitconfig.local` from the generated template if Git signing or
+2. Sign in to the Mac App Store first if you want the `mas` entries in
+   `Brewfile` installed on the first run.
+3. Run `./scripts/install` from the repository root. It installs Homebrew if
+   needed and runs `brew bundle --file=Brewfile`; if any `mas` entry fails
+   because you weren't signed in yet, rerun `brew bundle --file=Brewfile`
+   afterward. See [the application notes](docs/applications.md).
+4. Fill in `~/.gitconfig.local` from the generated template if Git signing or
    a personal identity is needed.
-4. Install the declared tools with `brew bundle --file=Brewfile` after signing
-   in to the App Store. See [the application notes](docs/applications.md).
 
-`install` only creates local directories, writes no credentials, and delegates
-link creation to `sync`; Homebrew and application installation stays an explicit
-separate command.
+`install` creates local directories, writes no credentials besides seeding
+`~/.gitconfig.local` from the template, installs Homebrew and the Brewfile,
+and delegates link creation to `sync`.
 
 ## Routine commands
 

@@ -2,7 +2,7 @@
 
 ## Homebrew
 
-Install the declared formulae and the App Store applications with:
+`./scripts/install` installs Homebrew if it's missing and then runs:
 
 ```zsh
 brew bundle --file=Brewfile
@@ -10,7 +10,7 @@ brew bundle --file=Brewfile
 
 The `mas` entries require being signed in to the Mac App Store. They can fail
 when an app has not yet been claimed by that Apple Account; in that case,
-install it once from the App Store and rerun the command.
+install it once from the App Store and rerun the command above manually.
 
 ## Direct downloads
 
