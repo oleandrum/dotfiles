@@ -26,7 +26,7 @@ directly, then dry-running the affected script.
 - `docs/applications.md` — non-Homebrew app notes and VS Code extension
   refresh instructions.
 - `Brewfile` — Homebrew formulae and Mac App Store (`mas`) apps; installed
-  explicitly, never by `install`.
+  automatically by `install` via `brew bundle`.
 
 ## The `home`/`config` ↔ `$HOME` mapping is the core mechanism
 
@@ -42,10 +42,13 @@ keeping the two arrays identical. `install` calls `sync` after creating
 
 - `install [--dry-run] [--force]` — macOS-only bootstrap. Creates
   `~/.ssh`/`~/.gnupg` (mode 700), seeds `~/.gitconfig.local` from the
-  template, runs `sync`, installs Deno and NVM if missing, installs the
-  current Node LTS, prints the Terminal-profile import path, copies fonts
-  into `~/Library/Fonts`, and installs VS Code extensions from
-  `config/vscode/extensions.txt` if the `code` CLI is available.
+  template, runs `sync`, installs Homebrew if missing and runs `brew bundle
+  --file=Brewfile` (a failed `mas` entry — e.g. not yet signed in to the Mac
+  App Store — prints a warning instead of aborting the script; rerun `brew
+  bundle --file=Brewfile` manually afterward), installs Deno and NVM if
+  missing, installs the current Node LTS, prints the Terminal-profile import
+  path, copies fonts into `~/Library/Fonts`, and installs VS Code extensions
+  from `config/vscode/extensions.txt` if the `code` CLI is available.
 - `sync [--dry-run] [--force]` — creates the symlinks from the shared
   `entries` array. Without `--force` it aborts on any collision (existing
   non-matching file/symlink at the target) without changing anything.

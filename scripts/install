@@ -11,7 +11,8 @@ sync_args=()
 
 usage() {
   print "Usage: $script_name [--dry-run] [--force]"
-  print "Creates local directories, installs Deno/NVM/Node LTS, then runs sync."
+  print "Creates local directories, runs sync, installs Homebrew and the"
+  print "Brewfile, then installs Deno/NVM/Node LTS."
 }
 
 for arg in "$@"; do
@@ -42,6 +43,29 @@ else
 fi
 
 "$script_dir/sync" "${sync_args[@]}"
+
+if $dry_run; then
+  [[ -x /opt/homebrew/bin/brew || -x /usr/local/bin/brew ]] || print 'install: Homebrew from https://brew.sh'
+  print "run: brew bundle --file=$repo_root/Brewfile"
+else
+  if [[ ! -x /opt/homebrew/bin/brew && ! -x /usr/local/bin/brew ]]; then
+    installer="$(mktemp "${TMPDIR:-/tmp}/homebrew-install.XXXXXX.sh")"
+    trap 'rm -f "$installer"' EXIT
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o "$installer"
+    NONINTERACTIVE=1 /bin/bash "$installer"
+    rm -f "$installer"
+    trap - EXIT
+  fi
+
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+  elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv zsh)"
+  fi
+
+  brew bundle --file="$repo_root/Brewfile" ||
+    print -u2 'brew bundle: some entries failed. Mac App Store apps need you signed in; rerun brew bundle --file=Brewfile after signing in.'
+fi
 
 if $dry_run; then
   [[ -x "$HOME/.deno/bin/deno" ]] || print 'install: Deno from https://deno.land/install.sh'
